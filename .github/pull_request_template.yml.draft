@@ -1,0 +1,52 @@
+name: PR Details
+title: ""
+body:
+  - type: textarea
+    id: details
+    attributes:
+      label: PR Details
+      description: Provide a detailed description of the pull request.
+      placeholder: Be sure to include contextual info, as readers may not be aware of what you are doing.
+    validations:
+      required: true
+  - type: textarea
+    id: issue
+    attributes:
+      label: Related Issue
+      description: Do not submit a pull request without an issue. If you are fixing an existing issue, please include Fixes #nnn" in your description. If this is a partial fix for an issue, open a new issue that references that issue, do not reference the partially fixed issue here.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Motivation and Context
+      description: Describe what happens in the version noted above that you'd like to change.
+    validations:
+      required: true
+  - type: textarea
+    id: testing
+    attributes:
+      label: How Has This Been Tested?
+      description: Describe what happens in the version noted above that you'd like to change.
+    validations:
+      required: true
+  - type: checkboxes
+    id: changes
+    attributes:
+      label: Types of changes
+    options:
+        - label: Defect fix (non-breaking change that fixes an issue)
+        - label: New feature (non-breaking change that adds functionality)
+        - label: Breaking change (fix or feature that cause existing functionality to change)
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Checklist
+    options:
+        - label: I have added any new packages to the sonar-scanner.properties file
+        - label: My change requires a change to the documentation.
+        - label: I have updated the documentation accordingly.
+        - label: I have read the [CONTRIBUTING](Contributing.md) documentation.
+          required: true
+        - label: I have added tests to cover my changes.
+        - label: All new and existing tests passed.
