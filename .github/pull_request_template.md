@@ -39,6 +39,6 @@
 - [ ] I have added any new packages to the sonar-scanner.properties file
 - [ ] My change requires a change to the documentation.
 - [ ] I have updated the documentation accordingly.
-- [ ] I have read the [**CONTRIBUTING**](Contributing.md) document.
+- [ ] I have read the [**CONTRIBUTING**](https://github.com/usdot-fhwa-stol/carma-platform/blob/develop/Contributing.md) document.
 - [ ] I have added tests to cover my changes.
 - [ ] All new and existing tests passed.
