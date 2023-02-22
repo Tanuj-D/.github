@@ -16,7 +16,8 @@ body:
       label: Version
       description: What version are you running that you noticed this problem?
       options:
-        - 4.2.0 (Current)
+        - 4.3.0 (Current)
+        - 4.2.0
         - 3.11.0
     validations:
       required: true
