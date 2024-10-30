@@ -2,6 +2,15 @@ name: Released Bug
 description: Report a bug found in a release
 labels: ["anomaly", "bug", "released"]
 body:
+  - type: dropdown 
+    id: STOLMember
+    attributes:
+      label: Are you Saxton Lab/Leidos employee? 
+      options:
+        - "Yes"
+        - "No"
+    validations:
+      required: true
   - type: textarea
     id: summary
     attributes:
