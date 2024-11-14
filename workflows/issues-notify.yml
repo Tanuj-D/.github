@@ -21,7 +21,7 @@ jobs:
      if: steps.check_leidos.outputs.notify == 'true' 
      uses: dawidd6/action-send-mail@v3 
      with: 
-      server_address: smtp.example.com # Replace with your SMTP server 
+      server_address: smtp.gmail.com # Replace with your SMTP server 
       server_port: 587 # Replace with your SMTP server port 
       username: ${{ secrets.SMTP_USERNAME }} # Store SMTP credentials in GitHub secrets 
       password: ${{ secrets.SMTP_PASSWORD }} 
@@ -31,5 +31,5 @@ jobs:
          Title: ${{ github.event.issue.title }} 
          URL: ${{ github.event.issue.html_url }} 
          Description: ${{ github.event.issue.body }} 
-      to: Cavsupportservices@dot.gov 
-      from: no-reply@example.com # Replace with the email address you want to use
+      to: Tanuj.Devulapalli@leidos.com 
+      from: ${{ secrets.SMTP_USERNAME }} # Replace with the email address you want to use
