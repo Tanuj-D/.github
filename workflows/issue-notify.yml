@@ -31,5 +31,5 @@ jobs:
          Title: ${{ github.event.issue.title }} 
          URL: ${{ github.event.issue.html_url }} 
          Description: ${{ github.event.issue.body }} 
-      to: Tanuj.Devulapalli@leidos.com 
+      to: devulapallitanuj@gmail.com 
       from: ${{ secrets.SMTP_USERNAME }} # Replace with the email address you want to use
