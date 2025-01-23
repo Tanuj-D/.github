@@ -3,7 +3,9 @@ name: Issue Notification for Non-Leidos Employees
 on: 
   issues: 
     types: [opened]
-    
+env:
+  ACTIONS_STEP_DEBUG: true
+  
 jobs: 
   notify: 
     runs-on: ubuntu-latest 
@@ -33,3 +35,4 @@ jobs:
          Description: ${{ github.event.issue.body }} 
        to: devulapallitanuj@gmail.com
        from: ${{ secrets.SMTP_USERNAME }} # Replace with the email address you want to use
+       
