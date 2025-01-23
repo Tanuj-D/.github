@@ -1,0 +1,23 @@
+name: Test Email Workflow
+
+on:
+  workflow_dispatch  # Allows you to manually trigger the workflow
+
+jobs:
+  test-email:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Send Test Email
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: smtp.gmail.com
+        server_port: 587
+        username: ${{ secrets.SMTP_USERNAME }}
+        password: ${{ secrets.SMTP_PASSWORD }}
+        subject: "Test Email from GitHub Actions"
+        body: |
+          This is a test email sent from a GitHub Actions workflow.
+          If you received this email, the configuration works correctly.
+        to: devulapallitanuj@gmail.com
+        from: ${{ secrets.SMTP_USERNAME }}
