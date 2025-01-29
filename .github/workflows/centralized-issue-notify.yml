@@ -1,48 +1,41 @@
-name: Issue Notification for Non-Leidos Employees
+name: Issue Notification from External Repositories
 
 on:
-  issues:
-    types: [opened, edited] # Ensure it's triggered for relevant issue events
+  repository_dispatch:
+    types: [issue_created]
 
 jobs:
   notify:
     runs-on: ubuntu-latest
-    steps:
-      - name: Log Payload
-        uses: actions/github-script@v6
-        with:
-          script: |
-            console.log("Full payload:", JSON.stringify(context.payload, null, 2));
-            console.log("Issue body:", context.payload.issue?.body || "No issue body found");
 
-      - name: Check if user is a Leidos employee
-        id: check_leidos
+    steps:
+      - name: Log Incoming Payload
+        id: log_payload
         uses: actions/github-script@v6
         with:
           script: |
-            const issue = context.payload.issue;
-            if (!issue || !issue.body) {
-              console.log("No issue or issue body found.");
-              core.setOutput('notify', 'false');
-            } else {
-              const isLeidosEmployee = issue.body.includes('Are you Saxton Lab/Leidos employee?') &&
-                                       issue.body.includes('No');
-              core.setOutput('notify', isLeidosEmployee ? 'true' : 'false');
+            console.log("Received Dispatch Event Payload:", JSON.stringify(context.payload, null, 2));
+            const issue = context.payload.client_payload.issue_data;
+            if (!issue) {
+              core.setFailed("No issue data in payload");
+              return;
             }
+            core.setOutput("title", issue.title);
+            core.setOutput("url", issue.html_url);
+            core.setOutput("body", issue.body);
 
       - name: Send Email Notification
-        if: steps.check_leidos.outputs.notify == 'true'
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
           server_port: 587
           username: ${{ secrets.SMTP_USERNAME }}
           password: ${{ secrets.SMTP_PASSWORD }}
-          subject: "New Issue from Non-Leidos Employee"
+          subject: "New Issue Created: ${{ steps.log_payload.outputs.title }}"
           body: |
-            A new issue was created by a non-Leidos employee:
-            Title: ${{ github.event.issue.title }}
-            URL: ${{ github.event.issue.html_url }}
-            Description: ${{ github.event.issue.body }}
+            A new issue was created:
+            - Title: ${{ steps.log_payload.outputs.title }}
+            - URL: ${{ steps.log_payload.outputs.url }}
+            - Description: ${{ steps.log_payload.outputs.body }}
           to: devulapallitanuj@gmail.com
           from: ${{ secrets.SMTP_USERNAME }}
