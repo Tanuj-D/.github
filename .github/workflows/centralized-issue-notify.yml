@@ -20,8 +20,8 @@ jobs:
               core.setFailed("No issue data in payload");
               return;
             }
-            if (!issue.body.includes("Are you Saxton Lab/Leidos employee?") || issue.body.includes("No")) {
-              core.setFailed("Issue is not from a non-Leidos employee");
+            if (!issue.body.includes("Are you Saxton Lab/Leidos employee?") || !issue.body.includes("No")) {
+              core.setFailed("Issue is from a Leidos employee");
               return;
             }
             core.setOutput("title", issue.title);
